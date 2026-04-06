@@ -1297,7 +1297,7 @@ export default function Home() {
         </div>
         <h2
           ref={splitTextRef}
-          className="text-5xl md:text-7xl text-center max-w-4xl tracking-tight leading-tight relative z-10"
+          className="text-4xl md:text-6xl lg:text-7xl text-center max-w-4xl tracking-tight leading-tight relative z-10 px-4"
         >
           berpengalaman dalam bidang Multimedia
         </h2>
