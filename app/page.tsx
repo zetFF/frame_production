@@ -34,6 +34,27 @@ const projects = [
     image: "/images/peresmian-balai2.png",
     year: "2026",
   },
+  {
+    id: 5,
+    title: "Testing | Talkshow Santai KBM & EIC",
+    category: "Record",
+    image: "/images/testing-talkshow.png",
+    year: "2026",
+  },
+  {
+    id: 6,
+    title: "Talkshow Santai bersama CEO 1010DRY",
+    category: "Record",
+    image: "/images/talkshow-tenten.png",
+    year: "2026",
+  },
+  {
+    id: 7,
+    title: "Talkshow Santai bersama Dosen STMIK El Rahma Yogyakarta",
+    category: "Record",
+    image: "/images/talkshow-etikabisnis.png",
+    year: "2026",
+  },
 ];
 
 const works = [
@@ -78,10 +99,10 @@ const morphImages = [
   },
   {
     h: "h-[300px]",
-    label: "Syawalan KBM & EIC",
-    image: "/images/foh-image2.png",
+    label: "Talkshow Event ",
+    image: "/images/sapto-ngedit.png",
   },
-  { h: "h-[400px]", label: "Design", image: "/images/foh-image.png" },
+  { h: "h-[400px]", label: "Streaming", image: "/images/streaming2.png" },
   { h: "h-[300px]", label: "Editing", image: "/images/fotbar-pdd-tahsin.png" },
   {
     h: "h-[400px]",
@@ -674,6 +695,8 @@ export default function Home() {
     const morph = morphRef.current;
     if (morph) {
       const cards = morph.querySelectorAll(".morph-card");
+
+      // Animasi masuk — tetap dengan efek stagger
       gsap.from(Array.from(cards), {
         scrollTrigger: { trigger: morph, start: "top 80%" },
         scale: 0.5,
@@ -683,18 +706,20 @@ export default function Home() {
         duration: 1,
         ease: "back.out(1.7)",
       });
-      Array.from(cards).forEach((card, i) => {
-        gsap.to(card, {
-          y: (i % 3) * 40 - 40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: morph,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+
+      // Parallax seragam — semua kartu bergerak dengan nilai y yang sama
+      gsap.to(Array.from(cards), {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: morph,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
       });
+
+      // Animasi title
       const morphTitle = morph.querySelector(".morph-title");
       if (morphTitle) {
         gsap.from(morphTitle, {
@@ -1058,7 +1083,7 @@ export default function Home() {
       <section className="h-screen flex items-center justify-center">
         <p
           ref={textRef}
-          className="text-2xl md:text-4xl text-center tracking-tighter max-w-lg"
+          className="text-2xl md:text-6xl text-center tracking-tighter max-w-3xl"
         >
           Apa yang telah kami lakukan selama ini?
         </p>
@@ -1125,7 +1150,7 @@ export default function Home() {
       </section>
 
       {/* PINNED */}
-      <section className="h-[200vh] flex items-center justify-center">
+      <section className="h-[250vh] flex items-center justify-center">
         <div ref={pinSectionRef}>
           <h2 className="text-6xl text-center max-w-4xl tracking-tighter">
             Kenapa harus memilih program layanan kami?
@@ -1173,10 +1198,10 @@ export default function Home() {
               />
             ))}
           </div>
-          <div className="reveal-shape absolute left-10 top-1/2 -translate-y-1/2 w-5 h-5 border border-white/30 rotate-45" />
+          {/* <div className="reveal-shape absolute left-10 top-1/2 -translate-y-1/2 w-5 h-5 border border-white/30 rotate-45" />
           <div className="reveal-shape absolute right-10 top-1/2 -translate-y-1/2 w-3 h-3 bg-purple-400/40 rotate-45" />
           <div className="reveal-shape absolute left-0 top-1/2 w-24 h-px bg-white/10" />
-          <div className="reveal-shape absolute right-0 top-1/2 w-24 h-px bg-white/10" />
+          <div className="reveal-shape absolute right-0 top-1/2 w-24 h-px bg-white/10" /> */}
           {/* <div className="reveal-label absolute bottom-8 left-10 flex flex-col gap-1">
             <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase font-mono">
               Frame Production
@@ -1198,20 +1223,20 @@ export default function Home() {
               — Our Services —
             </span>
           </div> */}
-          <div className="reveal-shape absolute top-[20%] left-[20%] w-1.5 h-1.5 rounded-full bg-purple-400/50" />
+          {/* <div className="reveal-shape absolute top-[20%] left-[20%] w-1.5 h-1.5 rounded-full bg-purple-400/50" />
           <div className="reveal-shape absolute top-[30%] right-[25%] w-1 h-1 rounded-full bg-white/30" />
           <div className="reveal-shape absolute bottom-[25%] left-[30%] w-2 h-2 rounded-full bg-blue-400/30" />
-          <div className="reveal-shape absolute top-[70%] right-[15%] w-1.5 h-1.5 rounded-full bg-purple-300/40" />
-          <div className="reveal-shape absolute left-[8%] top-1/2 -translate-y-1/2 flex flex-col gap-1 opacity-20">
+          <div className="reveal-shape absolute top-[70%] right-[15%] w-1.5 h-1.5 rounded-full bg-purple-300/40" /> */}
+          {/* <div className="reveal-shape absolute left-[8%] top-1/2 -translate-y-1/2 flex flex-col gap-1 opacity-20">
             <div className="w-3 h-px bg-white" />
             <div className="w-px h-16 bg-white ml-0" />
             <div className="w-3 h-px bg-white" />
-          </div>
-          <div className="reveal-shape absolute right-[8%] top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 opacity-20">
+          </div> */}
+          {/* <div className="reveal-shape absolute right-[8%] top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 opacity-20">
             <div className="w-3 h-px bg-white" />
             <div className="w-px h-16 bg-white ml-auto" />
             <div className="w-3 h-px bg-white" />
-          </div>
+          </div> */}
         </div>
 
         <div className="reveal-text relative z-30 text-center px-10">
@@ -1237,55 +1262,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SPLIT TEXT */}
       <section className="h-screen flex items-center justify-center px-10 relative overflow-hidden">
+        {/* ── DEKORASI SPLIT TEXT ── */}
         <div
           ref={splitDecorRef}
           className="absolute inset-0 pointer-events-none"
         >
-          <div className="split-label absolute left-6 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
-            <span className="text-[9px] tracking-[0.6em] uppercase text-white/15 font-mono whitespace-nowrap">
-              Frame Production · Multimedia ·
-            </span>
-          </div>
-          <div className="split-label absolute right-6 top-1/2 -translate-y-1/2 rotate-90 origin-center">
-            {/* <span className="text-[9px] tracking-[0.6em] uppercase text-white/15 font-mono whitespace-nowrap">
-              · Visual · Live · Creative
-            </span> */}
-          </div>
-          <div
-            className="split-shape absolute top-[15%] left-[6%] w-10 h-10 border-l-2 border-b-2 border-white/10"
-            style={{ borderRadius: "0 0 0 4px" }}
-          />
-          <div
-            className="split-shape absolute bottom-[15%] right-[6%] w-10 h-10 border-r-2 border-t-2 border-white/10"
-            style={{ borderRadius: "0 4px 0 0" }}
-          />
-          <div className="split-shape absolute top-1/2 -translate-y-1/2 -left-32 w-64 h-64 rounded-full border border-white/5" />
-          <div className="split-shape absolute top-1/2 -translate-y-1/2 -right-32 w-64 h-64 rounded-full border border-purple-500/8" />
+          {/* Teks vertikal kiri — rotated typography */}
+
+          {/* Diamond kecil tersebar */}
           <div className="split-shape absolute top-[25%] right-[18%] w-2 h-2 bg-purple-400/30 rotate-45" />
           <div className="split-shape absolute bottom-[28%] left-[18%] w-1.5 h-1.5 bg-white/20 rotate-45" />
           <div className="split-shape absolute top-[60%] right-[10%] w-1 h-1 bg-blue-400/40 rotate-45" />
-          {/* <div className="split-label absolute top-[22%] left-1/2 -translate-x-1/2 flex items-center gap-4">
-            <div className="w-12 h-px bg-white/10" />
-            <span className="text-[9px] tracking-[0.5em] uppercase text-white/20 font-mono">
-              Portfolio
-            </span>
-            <div className="w-12 h-px bg-white/10" />
-          </div> */}
-          {/* <div className="split-label absolute bottom-[22%] left-1/2 -translate-x-1/2 flex items-center gap-4">
-            <div className="w-8 h-px bg-white/10" />
-            <span className="text-[9px] tracking-[0.5em] uppercase text-white/15 font-mono">
-              since 2024
-            </span>
-            <div className="w-8 h-px bg-white/10" />
-          </div> */}
+
+          {/* Nomor pojok — editorial style */}
           <span className="split-label absolute top-8 left-10 text-[10px] text-white/15 font-mono tracking-widest">
             03 /
           </span>
-          {/* <span className="split-label absolute top-8 right-10 text-[10px] text-white/15 font-mono tracking-widest">
+          <span className="split-label absolute top-8 right-10 text-[10px] text-white/15 font-mono tracking-widest">
             SKILLS
-          </span> */}
+          </span>
+
+          {/* Plus crosshair kecil */}
           <div className="split-shape absolute top-[40%] left-[12%] opacity-20">
             <div className="absolute w-4 h-px bg-white top-1/2 left-0" />
             <div className="absolute w-px h-4 bg-white left-1/2 top-0" />
@@ -1295,9 +1293,11 @@ export default function Home() {
             <div className="absolute w-px h-3 bg-purple-300 left-1/2 top-0" />
           </div>
         </div>
+
+        {/* Teks utama */}
         <h2
           ref={splitTextRef}
-          className="text-4xl md:text-6xl lg:text-7xl text-center max-w-4xl tracking-tight leading-tight relative z-10 px-4"
+          className="text-5xl md:text-7xl text-center max-w-4xl tracking-tight leading-tight relative z-10"
         >
           berpengalaman dalam bidang Multimedia
         </h2>
@@ -1360,7 +1360,7 @@ export default function Home() {
       </section>
 
       {/* MARQUEE */}
-      <section className="py-24 overflow-hidden border-y border-white/5">
+      <section className="py-24 overflow-hidden">
         <div ref={marqueeRef} className="flex whitespace-nowrap">
           <div className="marquee-track flex items-center gap-16 pr-16">
             {[
@@ -1382,16 +1382,16 @@ export default function Home() {
       </section>
 
       {/* MORPH GRID */}
-      <section className="min-h-screen px-10 py-40 overflow-hidden">
+      <section className="min-h-screen px-4 sm:px-6 md:px-10 py-20 md:py-40 overflow-hidden">
         <div ref={morphRef} className="max-w-6xl mx-auto">
-          <h2 className="morph-title text-5xl md:text-7xl font-bold mb-20 overflow-hidden tracking-tighter">
+          <h2 className="morph-title text-4xl sm:text-5xl md:text-7xl font-bold mb-10 md:mb-20 overflow-hidden tracking-tighter">
             Capture the Moments
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {morphImages.map((card, i) => (
               <div
                 key={i}
-                className={`morph-card ${card.h} bg-neutral-900 rounded-3xl relative overflow-hidden group cursor-pointer`}
+                className="morph-card aspect-square bg-neutral-900 rounded-3xl relative overflow-hidden group cursor-pointer"
               >
                 {/* Foto — tampil jika image diisi */}
                 {card.image && (
@@ -1400,7 +1400,7 @@ export default function Home() {
                     alt={card.label}
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                   />
                 )}
 
@@ -1433,7 +1433,7 @@ export default function Home() {
                   {card.label}
                 </span>
 
-                {/* Badge kategori — selalu terlihat */}
+                {/* Badge kategori */}
                 <span className="absolute top-5 left-5 text-[10px] tracking-widest uppercase bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   {card.label}
                 </span>
@@ -1451,15 +1451,6 @@ export default function Home() {
             ref={parallaxDecorRef}
             className="absolute inset-0 pointer-events-none overflow-hidden"
           >
-            <div className="px-decor-item absolute -left-40 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/5" />
-            <div className="px-decor-item absolute -right-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-purple-500/10" />
-            <div className="px-decor-item absolute bottom-[20%] left-[8%] w-16 h-16 border border-white/10 rotate-12" />
-            <div className="px-decor-item absolute top-[20%] right-[8%] w-10 h-10 border border-purple-400/20 rotate-45" />
-            <div className="px-decor-item absolute top-[30%] left-[20%] w-2 h-2 bg-purple-400/30 rotate-45" />
-            <div className="px-decor-item absolute bottom-[35%] right-[22%] w-2 h-2 bg-white/20 rotate-45" />
-            <div className="px-decor-item absolute top-[55%] left-[35%] w-1.5 h-1.5 bg-blue-400/30 rotate-45" />
-            <div className="px-decor-item absolute left-0 top-[40%] w-20 h-px bg-white/8" />
-            <div className="px-decor-item absolute right-0 top-[60%] w-20 h-px bg-purple-400/15" />
             <div className="px-decor-item absolute top-[18%] left-[6%] flex flex-col gap-1">
               <span className="text-[9px] tracking-[0.5em] uppercase text-white/20 font-mono">
                 Depth
@@ -1487,16 +1478,6 @@ export default function Home() {
                   className="w-[2px] h-[2px] rounded-full bg-white/10"
                 />
               ))}
-            </div>
-            <div className="px-decor-item absolute left-4 top-1/2 -translate-y-1/2 -rotate-90">
-              <span className="text-[8px] tracking-[0.7em] uppercase text-white/10 font-mono whitespace-nowrap">
-                Experience · Depth · Visual
-              </span>
-            </div>
-            <div className="px-decor-item absolute right-4 top-1/2 -translate-y-1/2 rotate-90">
-              <span className="text-[8px] tracking-[0.7em] uppercase text-white/10 font-mono whitespace-nowrap">
-                Frame Production · 2024
-              </span>
             </div>
           </div>
           <div className="parallax-fg relative z-10 flex flex-col items-center justify-center h-full gap-6">

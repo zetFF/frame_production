@@ -744,7 +744,7 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section className="min-h-screen px-10 py-40">
+      <section className="min-h-screen px-10 py-80">
         <div ref={projectsRef} className="grid md:grid-cols-2 gap-20">
           {projects.map((project) => (
             <div key={project.id}>
