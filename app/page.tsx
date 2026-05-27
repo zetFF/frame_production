@@ -55,6 +55,13 @@ const projects = [
     image: "/images/talkshow-etikabisnis.png",
     year: "2026",
   },
+  {
+    id: 8,
+    title: "Talkshow berbasis Seminar The Secret of Viral Content",
+    category: "Live",
+    image: "/images/seminar_talkshow.png",
+    year: "2026",
+  },
 ];
 
 const works = [
@@ -106,8 +113,8 @@ const morphImages = [
   { h: "h-[300px]", label: "Editing", image: "/images/fotbar-pdd-tahsin.png" },
   {
     h: "h-[400px]",
-    label: "Behind The Scene",
-    image: "/images/foh-image1.png",
+    label: "Operator Setup",
+    image: "/images/foh_revaldo.png",
   },
 ];
 
@@ -1314,7 +1321,10 @@ export default function Home() {
               "Kelompok Bisnis Mahasiswa",
               "Elrahma Islamic Center",
               "STMIK El Rahma Yogyakarta",
-              "Van Audio Production",
+              "Fan Audio Production",
+              "Haz Project",
+              "SRMAUDIO33",
+              "MelodicNine Band",
             ].map((item) => (
               <span
                 key={item}
