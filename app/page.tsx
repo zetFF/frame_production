@@ -933,20 +933,6 @@ export default function Home() {
             style={{ borderRadius: "0 0 4px 0" }}
           />
 
-          {/* === SIDE LABELS — vertikal === */}
-          {/* Kiri */}
-          {/* <div className="hero-side-label absolute left-8 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
-            <span className="text-[9px] tracking-[0.6em] uppercase text-white/20 font-mono whitespace-nowrap">
-              Photography · Videography · Livestreaming
-            </span>
-          </div> */}
-          {/* Kanan */}
-          {/* <div className="hero-side-label absolute right-8 top-1/2 -translate-y-1/2 rotate-90 origin-center">
-            <span className="text-[9px] tracking-[0.6em] uppercase text-white/20 font-mono whitespace-nowrap">
-              Yogyakarta · Est. 2024 · Frame Production
-            </span>
-          </div> */}
-
           {/* === HORIZONTAL LINES === */}
           <div className="hero-line absolute left-0 top-[30%] w-[12%] h-px bg-white/10 origin-left" />
           <div
@@ -1198,45 +1184,6 @@ export default function Home() {
               />
             ))}
           </div>
-          {/* <div className="reveal-shape absolute left-10 top-1/2 -translate-y-1/2 w-5 h-5 border border-white/30 rotate-45" />
-          <div className="reveal-shape absolute right-10 top-1/2 -translate-y-1/2 w-3 h-3 bg-purple-400/40 rotate-45" />
-          <div className="reveal-shape absolute left-0 top-1/2 w-24 h-px bg-white/10" />
-          <div className="reveal-shape absolute right-0 top-1/2 w-24 h-px bg-white/10" /> */}
-          {/* <div className="reveal-label absolute bottom-8 left-10 flex flex-col gap-1">
-            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase font-mono">
-              Frame Production
-            </span>
-            <span className="text-[10px] text-white/20 tracking-[0.3em] uppercase font-mono">
-              Est. 2024 · Yogyakarta
-            </span>
-          </div> */}
-          {/* <div className="reveal-label absolute bottom-8 right-10 flex flex-col items-end gap-1">
-            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase font-mono">
-              Multimedia Studio
-            </span>
-            <span className="text-[10px] text-white/20 tracking-[0.3em] uppercase font-mono">
-              ✦ Creative · Visual · Live
-            </span>
-          </div> */}
-          {/* <div className="reveal-label absolute top-8 left-1/2 -translate-x-1/2">
-            <span className="text-[10px] text-white/25 tracking-[0.5em] uppercase font-mono">
-              — Our Services —
-            </span>
-          </div> */}
-          {/* <div className="reveal-shape absolute top-[20%] left-[20%] w-1.5 h-1.5 rounded-full bg-purple-400/50" />
-          <div className="reveal-shape absolute top-[30%] right-[25%] w-1 h-1 rounded-full bg-white/30" />
-          <div className="reveal-shape absolute bottom-[25%] left-[30%] w-2 h-2 rounded-full bg-blue-400/30" />
-          <div className="reveal-shape absolute top-[70%] right-[15%] w-1.5 h-1.5 rounded-full bg-purple-300/40" /> */}
-          {/* <div className="reveal-shape absolute left-[8%] top-1/2 -translate-y-1/2 flex flex-col gap-1 opacity-20">
-            <div className="w-3 h-px bg-white" />
-            <div className="w-px h-16 bg-white ml-0" />
-            <div className="w-3 h-px bg-white" />
-          </div> */}
-          {/* <div className="reveal-shape absolute right-[8%] top-1/2 -translate-y-1/2 flex flex-col items-end gap-1 opacity-20">
-            <div className="w-3 h-px bg-white" />
-            <div className="w-px h-16 bg-white ml-auto" />
-            <div className="w-3 h-px bg-white" />
-          </div> */}
         </div>
 
         <div className="reveal-text relative z-30 text-center px-10">
@@ -1487,22 +1434,6 @@ export default function Home() {
             <h2 className="text-5xl md:text-7xl text-center tracking-tighter">
               Solusi untuk event anda
             </h2>
-            {/* <div className="flex items-center gap-12 mt-4">
-              {[
-                { num: "14+", label: "Projects" },
-                { num: "3", label: "Clients" },
-                { num: "142h", label: "Terbang" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="text-2xl font-bold text-white/60 tracking-tight">
-                    {s.num}
-                  </div>
-                  <div className="text-[9px] tracking-[0.4em] uppercase text-white/25 font-mono mt-1">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </section>
