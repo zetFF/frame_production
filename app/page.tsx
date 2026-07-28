@@ -1141,15 +1141,7 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* PINNED */}
-      <section className="h-[250vh] flex items-center justify-center">
-        <div ref={pinSectionRef}>
-          <h2 className="text-6xl text-center max-w-4xl tracking-tighter">
-            Kenapa harus memilih program layanan kami?
-          </h2>
-        </div>
-      </section>
+    
 
       {/* FULLSCREEN REVEAL */}
       <section
