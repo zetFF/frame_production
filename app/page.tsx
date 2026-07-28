@@ -1109,7 +1109,6 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* HORIZONTAL SCROLL */}
       <section className="h-screen overflow-hidden">
         <div
@@ -1143,15 +1142,12 @@ export default function Home() {
         </div>
       </section>
 
-        {/* PINNED */}
+      {/* PINNED */}
       <section className="h-[250vh] flex items-center justify-center">
         <div ref={pinSectionRef}>
-          <h2 className="text-6xl text-center max-w-4xl tracking-tighter">
-        
-          </h2>
+          <h2 className="text-6xl text-center max-w-4xl tracking-tighter"></h2>
         </div>
       </section>
-    
 
       {/* FULLSCREEN REVEAL */}
       <section
