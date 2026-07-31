@@ -1,122 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useRef } from "react";
 import Image from "next/image";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const projects = [
-  {
-    id: 1,
-    title: "Event Rehat Sejenak Bersama Alqur'an",
-    category: "Livestreaming",
-    image: "/images/rsba.png",
-    year: "2025",
-  },
-  {
-    id: 2,
-    title: "Event Syawalan Organisasi KBM & EIC",
-    category: "Livestreaming",
-    image: "/images/syawalan-organisasi.png",
-    year: "2026",
-  },
-  {
-    id: 3,
-    title: "Event Peresmian Balai Prawirotaman III",
-    category: "Livestreaming",
-    image: "/images/peresmian-balai.png",
-    year: "2026",
-  },
-  {
-    id: 4,
-    title: "Event Peresmian Balai Prawirotaman III",
-    category: "Livestreaming",
-    image: "/images/peresmian-balai2.png",
-    year: "2026",
-  },
-  {
-    id: 5,
-    title: "Testing | Talkshow Santai KBM & EIC",
-    category: "Record",
-    image: "/images/testing-talkshow.png",
-    year: "2026",
-  },
-  {
-    id: 6,
-    title: "Talkshow Santai bersama CEO 1010DRY",
-    category: "Record",
-    image: "/images/talkshow-tenten.png",
-    year: "2026",
-  },
-  {
-    id: 7,
-    title: "Talkshow Santai bersama Dosen STMIK El Rahma Yogyakarta",
-    category: "Record",
-    image: "/images/talkshow-etikabisnis.png",
-    year: "2026",
-  },
-  {
-    id: 8,
-    title: "Talkshow berbasis Seminar The Secret of Viral Content",
-    category: "Live",
-    image: "/images/seminar_talkshow.png",
-    year: "2026",
-  },
-];
-
-const works = [
-  {
-    id: 1,
-    title: "Photography On Stage",
-    category: "Photography",
-    image: "/images/photography.png",
-  },
-  {
-    id: 2,
-    title: "Desain Grafis Progress",
-    category: "Design",
-    image: "/images/canva-progress.png",
-  },
-  {
-    id: 3,
-    title: "Livestreaming Multicam",
-    category: "Livestreaming",
-    image: "/images/foh-image.png",
-  },
-  {
-    id: 4,
-    title: "Cinematic & Documenter Take Video",
-    category: "Videography",
-    image: "/images/videography.png",
-  },
-  {
-    id: 5,
-    title: "Editing Video",
-    category: "Video",
-    image: "/images/streaming.png",
-  },
-];
-
-const morphImages = [
-  { h: "h-[300px]", label: "Event RSBA", image: "/images/foh-tahsin.png" },
-  {
-    h: "h-[400px]",
-    label: "Syawalan KBM & EIC",
-    image: "/images/campers-valdo.png",
-  },
-  {
-    h: "h-[300px]",
-    label: "Talkshow Event ",
-    image: "/images/sapto-ngedit.png",
-  },
-  { h: "h-[400px]", label: "Streaming", image: "/images/streaming2.png" },
-  { h: "h-[300px]", label: "Editing", image: "/images/fotbar-pdd-tahsin.png" },
-  {
-    h: "h-[400px]",
-    label: "Operator Setup",
-    image: "/images/foh_revaldo.png",
-  },
-];
+import { projects, works, morphImages } from "@/data";
+import { useHomeAnimations } from "@/hooks/useHomeAnimations";
 
 export default function Home() {
   const heroRef = useRef<HTMLHeadingElement | null>(null);
@@ -141,724 +29,35 @@ export default function Home() {
   const cursorDotRef = useRef<HTMLDivElement | null>(null);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
-  // decorated section refs
   const revealDecorRef = useRef<HTMLDivElement | null>(null);
   const splitDecorRef = useRef<HTMLDivElement | null>(null);
   const parallaxDecorRef = useRef<HTMLDivElement | null>(null);
   const heroDecorRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // ============================================
-    // 🔥 CUSTOM MAGNETIC CURSOR
-    // ============================================
-    const cursor = cursorRef.current;
-    const cursorDot = cursorDotRef.current;
-
-    if (cursor && cursorDot) {
-      let mouseX = 0,
-        mouseY = 0,
-        cursorX = 0,
-        cursorY = 0,
-        dotX = 0,
-        dotY = 0;
-
-      window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      gsap.ticker.add(() => {
-        cursorX += (mouseX - cursorX) * 0.08;
-        cursorY += (mouseY - cursorY) * 0.08;
-        dotX += (mouseX - dotX) * 0.35;
-        dotY += (mouseY - dotY) * 0.35;
-        gsap.set(cursor, { x: cursorX - 20, y: cursorY - 20 });
-        gsap.set(cursorDot, { x: dotX - 4, y: dotY - 4 });
-      });
-
-      const hoverTargets = document.querySelectorAll(
-        "a, button, .morph-card, .float-obj, h1, h2",
-      );
-      hoverTargets.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          gsap.to(cursor, {
-            scale: 2.5,
-            opacity: 0.6,
-            borderColor: "rgba(168,85,247,0.8)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-        el.addEventListener("mouseleave", () => {
-          gsap.to(cursor, {
-            scale: 1,
-            opacity: 1,
-            borderColor: "rgba(255,255,255,0.5)",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-      });
-    }
-
-    // ============================================
-    // 🔥 HERO 3D TILT EFFECT
-    // ============================================
-    const heroSection = heroSectionRef.current;
-    const heroText = heroRef.current;
-
-    if (heroSection && heroText) {
-      const handleMouseMove = (e: MouseEvent) => {
-        const rect = heroSection.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const x = e.clientX - rect.left - centerX;
-        const y = e.clientY - rect.top - centerY;
-
-        gsap.to(heroText, {
-          rotateX: -(y / centerY) * 12,
-          rotateY: (x / centerX) * 12,
-          transformPerspective: 800,
-          ease: "power2.out",
-          duration: 0.6,
-        });
-
-        gsap.to(".hero-glow", {
-          x: (x / centerX) * 40,
-          y: (y / centerY) * 40,
-          duration: 0.8,
-          ease: "power2.out",
-        });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(heroText, {
-          rotateX: 0,
-          rotateY: 0,
-          duration: 1,
-          ease: "elastic.out(1, 0.5)",
-        });
-        gsap.to(".hero-glow", { x: 0, y: 0, duration: 1, ease: "power3.out" });
-      };
-
-      heroSection.addEventListener("mousemove", handleMouseMove);
-      heroSection.addEventListener("mouseleave", handleMouseLeave);
-    }
-
-    // ============================================
-    // 🎨 HERO DECOR ANIMATIONS
-    // ============================================
-    const heroDecor = heroDecorRef.current;
-    if (heroDecor) {
-      // Corner brackets fade + scale in
-      gsap.from(heroDecor.querySelectorAll(".hero-corner"), {
-        scale: 0,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 1.2,
-        ease: "expo.out",
-        delay: 0.3,
-      });
-
-      // Side labels slide in
-      gsap.from(heroDecor.querySelectorAll(".hero-side-label"), {
-        x: (i) => (i % 2 === 0 ? -40 : 40),
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power3.out",
-        delay: 0.6,
-      });
-
-      // Tag pills pop in
-      gsap.from(heroDecor.querySelectorAll(".hero-tag"), {
-        y: 20,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        delay: 0.8,
-      });
-
-      // Diagonal lines draw in
-      gsap.from(heroDecor.querySelectorAll(".hero-line"), {
-        scaleX: 0,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 1,
-        ease: "power3.inOut",
-        delay: 0.5,
-        transformOrigin: "left center",
-      });
-
-      // Floating dots randomize position on scroll
-      gsap.from(heroDecor.querySelectorAll(".hero-dot"), {
-        scale: 0,
-        opacity: 0,
-        stagger: 0.05,
-        duration: 0.6,
-        ease: "back.out(2)",
-        delay: 1,
-      });
-
-      // Slow orbit for the big ring
-      gsap.to(heroDecor.querySelector(".hero-orbit"), {
-        rotation: 360,
-        duration: 30,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center",
-      });
-
-      // Counter-orbit inner ring
-      gsap.to(heroDecor.querySelector(".hero-orbit-inner"), {
-        rotation: -360,
-        duration: 18,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center",
-      });
-
-      // Pulsing small circle
-      gsap.to(heroDecor.querySelectorAll(".hero-pulse"), {
-        scale: 1.5,
-        opacity: 0,
-        duration: 1.8,
-        repeat: -1,
-        ease: "power2.out",
-        stagger: 0.6,
-      });
-
-      // Bottom bar slide up
-      gsap.from(heroDecor.querySelector(".hero-bottom-bar"), {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 1.2,
-      });
-    }
-
-    const hero = heroRef.current;
-    const text = textRef.current;
-    const projectsEl = projectsRef.current;
-    const horizontal = horizontalRef.current;
-    const pin = pinSectionRef.current;
-
-    if (!hero || !text || !projectsEl || !horizontal || !pin) return;
-
-    gsap.from(hero, {
-      opacity: 0,
-      scale: 0.8,
-      duration: 1.5,
-      ease: "power3.out",
-    });
-
-    gsap.from(text, {
-      scrollTrigger: { trigger: text, start: "top 80%" },
-      y: 100,
-      opacity: 0,
-      duration: 1.2,
-    });
-
-    gsap.from(Array.from(projectsEl.children), {
-      scrollTrigger: { trigger: projectsEl, start: "top 80%" },
-      y: 100,
-      opacity: 0,
-      stagger: 0.2,
-    });
-
-    gsap.to(horizontal, {
-      x: () => -(horizontal.scrollWidth - window.innerWidth),
-      ease: "none",
-      scrollTrigger: {
-        trigger: horizontal,
-        start: "top top",
-        end: () => "+=" + horizontal.scrollWidth,
-        scrub: true,
-        pin: true,
-        onUpdate: (self) => {
-          const fadeStart = 0.8;
-          const opacity =
-            self.progress < fadeStart
-              ? 1
-              : 1 - (self.progress - fadeStart) / (1 - fadeStart);
-          gsap.set(horizontal, { opacity });
-        },
-      },
-    });
-
-    gsap.from(pin, {
-      scrollTrigger: {
-        trigger: pin,
-        start: "top center",
-        end: "bottom top",
-        scrub: true,
-      },
-      opacity: 0,
-      y: 200,
-    });
-
-    // FULLSCREEN REVEAL
-    const reveal = revealRef.current;
-    if (reveal) {
-      const image = reveal.querySelector(".reveal-image");
-      const revealText = reveal.querySelector(".reveal-text");
-      const overlay = reveal.querySelector(".reveal-overlay");
-
-      if (image && revealText) {
-        gsap.fromTo(
-          reveal,
-          { clipPath: "inset(10% 10% 10% 10% round 32px)" },
-          {
-            clipPath: "inset(0% 0% 0% 0% round 0px)",
-            ease: "power2.inOut",
-            scrollTrigger: {
-              trigger: reveal,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          },
-        );
-        gsap.fromTo(
-          image,
-          { scale: 1.3, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: reveal,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          },
-        );
-        gsap.from(revealText, {
-          y: 80,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: reveal, start: "top 60%" },
-        });
-        if (overlay) {
-          gsap.fromTo(
-            overlay,
-            { opacity: 0.7 },
-            {
-              opacity: 0.4,
-              ease: "none",
-              scrollTrigger: {
-                trigger: reveal,
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-        }
-      }
-
-      const revealDecor = revealDecorRef.current;
-      if (revealDecor) {
-        gsap.from(revealDecor.querySelectorAll(".reveal-shape"), {
-          scale: 0,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 1,
-          ease: "back.out(1.7)",
-          scrollTrigger: { trigger: reveal, start: "top 50%" },
-        });
-        gsap.from(revealDecor.querySelectorAll(".reveal-label"), {
-          y: 20,
-          opacity: 0,
-          stagger: 0.08,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: { trigger: reveal, start: "top 50%" },
-        });
-        gsap.to(revealDecor.querySelector(".orbit-ring"), {
-          rotation: 360,
-          duration: 20,
-          repeat: -1,
-          ease: "none",
-          transformOrigin: "center center",
-        });
-        gsap.to(revealDecor.querySelector(".orbit-ring-2"), {
-          rotation: -360,
-          duration: 14,
-          repeat: -1,
-          ease: "none",
-          transformOrigin: "center center",
-        });
-      }
-    }
-
-    // SPLIT TEXT
-    const split = splitTextRef.current;
-    if (split) {
-      const chars = split.innerText.split("");
-      split.innerHTML = chars
-        .map((char) =>
-          char === " "
-            ? `<span class="char">&nbsp;</span>`
-            : `<span class="char">${char}</span>`,
-        )
-        .join("");
-      gsap.from(split.querySelectorAll(".char"), {
-        scrollTrigger: { trigger: split, start: "top 80%" },
-        y: 100,
-        opacity: 0,
-        stagger: 0.05,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-    }
-
-    const splitDecor = splitDecorRef.current;
-    if (splitDecor) {
-      const splitSection = split?.closest("section");
-      gsap.from(splitDecor.querySelectorAll(".split-shape"), {
-        scale: 0,
-        opacity: 0,
-        rotation: (i) => (i % 2 === 0 ? -30 : 30),
-        stagger: 0.12,
-        duration: 1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: splitSection || splitDecor,
-          start: "top 80%",
-        },
-      });
-      gsap.from(splitDecor.querySelectorAll(".split-label"), {
-        x: (i) => (i % 2 === 0 ? -30 : 30),
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: splitSection || splitDecor,
-          start: "top 75%",
-        },
-      });
-      gsap.to(splitDecor.querySelectorAll(".split-shape"), {
-        y: (i) => (i % 2 === 0 ? -60 : 60),
-        ease: "none",
-        scrollTrigger: {
-          trigger: splitSection || splitDecor,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }
-
-    // PARALLAX
-    const parallax = parallaxRef.current;
-    if (parallax) {
-      const bg = parallax.querySelector(".parallax-bg");
-      const fg = parallax.querySelector(".parallax-fg");
-      if (bg && fg) {
-        gsap.to(bg, {
-          y: 200,
-          scrollTrigger: {
-            trigger: parallax,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-        gsap.to(fg, {
-          y: -150,
-          scrollTrigger: {
-            trigger: parallax,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
-      const parallaxDecor = parallaxDecorRef.current;
-      if (parallaxDecor) {
-        const decorItems = parallaxDecor.querySelectorAll(".px-decor-item");
-        decorItems.forEach((item, i) => {
-          gsap.to(item, {
-            y: i % 3 === 0 ? -80 : i % 3 === 1 ? 80 : -50,
-            ease: "none",
-            scrollTrigger: {
-              trigger: parallax,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-        });
-        gsap.from(Array.from(decorItems), {
-          opacity: 0,
-          scale: 0.5,
-          stagger: 0.1,
-          duration: 1,
-          ease: "back.out(1.5)",
-          scrollTrigger: { trigger: parallax, start: "top 70%" },
-        });
-      }
-    }
-
-    // FLOATING OBJECTS
-    const floatingObjs = floatingObjsRef.current;
-    if (floatingObjs) {
-      const items = floatingObjs.querySelectorAll(".float-obj");
-      items.forEach((item, i) => {
-        const speed = (i % 3 === 0 ? -1 : i % 3 === 1 ? -2 : -0.5) * 120;
-        gsap.to(item, {
-          y: speed,
-          ease: "none",
-          scrollTrigger: {
-            trigger: floatingObjs,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-        gsap.to(item, {
-          rotation: i % 2 === 0 ? 45 : -45,
-          ease: "none",
-          scrollTrigger: {
-            trigger: floatingObjs,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
-      const floatTitle = floatingObjs.querySelector(".float-title");
-      if (floatTitle) {
-        gsap.from(floatTitle, {
-          y: 80,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: floatingObjs, start: "top 70%" },
-        });
-      }
-    }
-
-    // COUNTER
-    const counter = counterRef.current;
-    if (counter) {
-      const items = counter.querySelectorAll(".count-item");
-      gsap.from(Array.from(items), {
-        scrollTrigger: { trigger: counter, start: "top 75%" },
-        y: 60,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      items.forEach((item) => {
-        const numberEl = item.querySelector(".count-number");
-        if (!numberEl) return;
-        const target = parseInt(numberEl.getAttribute("data-target") || "0");
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: { trigger: counter, start: "top 75%" },
-          onUpdate: () => {
-            numberEl.textContent = Math.round(obj.val).toLocaleString();
-          },
-        });
-      });
-    }
-
-    // MARQUEE
-    const marquee = marqueeRef.current;
-    if (marquee) {
-      const track = marquee.querySelector(".marquee-track");
-      if (track) {
-        const clone = track.cloneNode(true) as HTMLElement;
-        marquee.appendChild(clone);
-        gsap.to([track, clone], {
-          xPercent: -100,
-          repeat: -1,
-          duration: 18,
-          ease: "none",
-        });
-        gsap.from(marquee, {
-          opacity: 0,
-          y: 40,
-          duration: 1,
-          scrollTrigger: { trigger: marquee, start: "top 85%" },
-        });
-      }
-    }
-
-    // MORPH GRID
-    const morph = morphRef.current;
-    if (morph) {
-      const cards = morph.querySelectorAll(".morph-card");
-
-      // Animasi masuk — tetap dengan efek stagger
-      gsap.from(Array.from(cards), {
-        scrollTrigger: { trigger: morph, start: "top 80%" },
-        scale: 0.5,
-        opacity: 0,
-        rotation: (i) => (i % 2 === 0 ? -15 : 15),
-        stagger: { amount: 0.8, from: "center" },
-        duration: 1,
-        ease: "back.out(1.7)",
-      });
-
-      // Parallax seragam — semua kartu bergerak dengan nilai y yang sama
-      gsap.to(Array.from(cards), {
-        y: -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: morph,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      // Animasi title
-      const morphTitle = morph.querySelector(".morph-title");
-      if (morphTitle) {
-        gsap.from(morphTitle, {
-          clipPath: "inset(0% 100% 0% 0%)",
-          duration: 1.2,
-          ease: "power3.inOut",
-          scrollTrigger: { trigger: morph, start: "top 75%" },
-        });
-      }
-    }
-
-    // WINDOW REVEAL
-    const windowReveal = windowRevealRef.current;
-    if (windowReveal) {
-      gsap.fromTo(
-        windowReveal,
-        { clipPath: "polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)" },
-        {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: windowReveal,
-            start: "top 85%",
-            end: "top 20%",
-            scrub: 1.5,
-          },
-        },
-      );
-      const inner = windowReveal.querySelector(".window-inner");
-      if (inner) {
-        gsap.from(inner, {
-          opacity: 0,
-          scale: 0.92,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: { trigger: windowReveal, start: "top 50%" },
-        });
-      }
-    }
-
-    // TIMELINE
-    const timeline = timelineRef.current;
-    if (timeline) {
-      const line = timeline.querySelector(".tl-line");
-      if (line) {
-        gsap.fromTo(
-          line,
-          { scaleY: 0, transformOrigin: "top center" },
-          {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: timeline,
-              start: "top 60%",
-              end: "bottom 80%",
-              scrub: true,
-            },
-          },
-        );
-      }
-      const items = timeline.querySelectorAll(".tl-item");
-      items.forEach((item, i) => {
-        gsap.from(item, {
-          x: i % 2 === 0 ? -100 : 100,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: item, start: "top 80%" },
-        });
-        const dot = item.querySelector(".tl-dot");
-        if (dot)
-          gsap.from(dot, {
-            scale: 0,
-            duration: 0.5,
-            ease: "back.out(2)",
-            scrollTrigger: { trigger: item, start: "top 80%" },
-          });
-      });
-      const tlTitle = timeline.querySelector(".tl-title");
-      if (tlTitle)
-        gsap.from(tlTitle, {
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: timeline, start: "top 80%" },
-        });
-    }
-
-    // FOOTER
-    const footer = footerRef.current;
-    if (footer) {
-      const bigText = footer.querySelector(".footer-big-text");
-      if (bigText)
-        gsap.from(bigText, {
-          y: 120,
-          opacity: 0,
-          duration: 1.4,
-          ease: "power3.out",
-          scrollTrigger: { trigger: footer, start: "top 80%" },
-        });
-      gsap.from(Array.from(footer.querySelectorAll(".footer-link")), {
-        y: 40,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: footer, start: "top 75%" },
-      });
-      const bottomBar = footer.querySelector(".footer-bottom");
-      if (bottomBar)
-        gsap.from(bottomBar, {
-          opacity: 0,
-          y: 20,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: footer, start: "top 60%" },
-        });
-      footer.querySelectorAll(".footer-line").forEach((line) => {
-        gsap.fromTo(
-          line,
-          { scaleX: 0, transformOrigin: "left center" },
-          {
-            scaleX: 1,
-            duration: 1.2,
-            ease: "power3.inOut",
-            scrollTrigger: { trigger: footer, start: "top 80%" },
-          },
-        );
-      });
-    }
-  }, []);
+  useHomeAnimations({
+    cursorRef,
+    cursorDotRef,
+    heroSectionRef,
+    heroRef,
+    heroDecorRef,
+    textRef,
+    projectsRef,
+    horizontalRef,
+    pinSectionRef,
+    revealRef,
+    revealDecorRef,
+    splitTextRef,
+    splitDecorRef,
+    parallaxRef,
+    parallaxDecorRef,
+    floatingObjsRef,
+    counterRef,
+    marqueeRef,
+    morphRef,
+    windowRevealRef,
+    timelineRef,
+    footerRef,
+  });
 
   return (
     <main className="bg-black text-white overflow-hidden cursor-none">
@@ -880,18 +79,14 @@ export default function Home() {
         <div className="absolute w-[600px] h-[600px] bg-blue-500/20 blur-[200px] bottom-[-200px] right-[-200px]" />
       </div>
 
-      {/* ============================================ */}
-      {/* 🔥 HERO — dengan dekorasi baru              */}
-      {/* ============================================ */}
+      {/* HERO */}
       <section
         ref={heroSectionRef}
         className="h-screen flex items-center justify-center relative overflow-hidden cursor-none"
       >
-        {/* Glow background */}
         <div className="hero-glow absolute w-[600px] h-[600px] bg-purple-500/30 blur-[120px] rounded-full pointer-events-none" />
         <div className="hero-glow absolute w-[400px] h-[400px] bg-blue-500/20 blur-[100px] rounded-full pointer-events-none" />
 
-        {/* Grid lines */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
@@ -901,46 +96,36 @@ export default function Home() {
           }}
         />
 
-        {/* ── DEKORASI HERO ── */}
         <div
           ref={heroDecorRef}
           className="absolute inset-0 pointer-events-none overflow-hidden"
         >
-          {/* === ORBIT RINGS === */}
-          {/* Ring besar mengelilingi layar */}
           <div
             className="hero-orbit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[780px] h-[780px] rounded-full"
             style={{ border: "1px dashed rgba(168,85,247,0.12)" }}
           />
-          {/* Ring dalam lebih kecil */}
           <div
             className="hero-orbit-inner absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] rounded-full"
             style={{ border: "1px dashed rgba(255,255,255,0.06)" }}
           />
 
-          {/* === CORNER BRACKETS === */}
-          {/* Kiri atas */}
           <div
             className="hero-corner absolute top-8 left-8 w-10 h-10 border-l-2 border-t-2 border-white/20"
             style={{ borderRadius: "4px 0 0 0" }}
           />
-          {/* Kanan atas */}
           <div
             className="hero-corner absolute top-8 right-8 w-10 h-10 border-r-2 border-t-2 border-white/20"
             style={{ borderRadius: "0 4px 0 0" }}
           />
-          {/* Kiri bawah */}
           <div
             className="hero-corner absolute bottom-8 left-8 w-10 h-10 border-l-2 border-b-2 border-white/20"
             style={{ borderRadius: "0 0 0 4px" }}
           />
-          {/* Kanan bawah */}
           <div
             className="hero-corner absolute bottom-8 right-8 w-10 h-10 border-r-2 border-b-2 border-white/20"
             style={{ borderRadius: "0 0 4px 0" }}
           />
 
-          {/* === HORIZONTAL LINES === */}
           <div className="hero-line absolute left-0 top-[30%] w-[12%] h-px bg-white/10 origin-left" />
           <div
             className="hero-line absolute right-0 top-[30%] w-[12%] h-px bg-white/10"
@@ -952,29 +137,24 @@ export default function Home() {
             style={{ transformOrigin: "right center" }}
           />
 
-          {/* === TAG PILLS === */}
-          {/* Kiri tengah atas */}
           <div className="hero-tag absolute top-[28%] left-16 flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-purple-400/60" />
             <span className="text-[9px] tracking-[0.4em] uppercase text-white/25 font-mono">
               Multimedia
             </span>
           </div>
-          {/* Kanan tengah atas */}
           <div className="hero-tag absolute top-[28%] right-16 flex items-center gap-2">
             <span className="text-[9px] tracking-[0.4em] uppercase text-white/25 font-mono">
               Creative
             </span>
             <div className="w-1.5 h-1.5 rounded-full bg-blue-400/60" />
           </div>
-          {/* Kiri tengah bawah */}
           <div className="hero-tag absolute top-[72%] left-16 flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
             <span className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-mono">
               Visual
             </span>
           </div>
-          {/* Kanan tengah bawah */}
           <div className="hero-tag absolute top-[72%] right-16 flex items-center gap-2">
             <span className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-mono">
               Simple
@@ -982,7 +162,6 @@ export default function Home() {
             <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
           </div>
 
-          {/* === FLOATING DOTS TERSEBAR === */}
           <div className="hero-dot absolute top-[18%] left-[22%] w-1 h-1 rounded-full bg-purple-400/50" />
           <div className="hero-dot absolute top-[22%] right-[28%] w-1.5 h-1.5 rounded-full bg-white/20" />
           <div className="hero-dot absolute top-[78%] left-[30%] w-1 h-1 rounded-full bg-blue-400/40" />
@@ -990,7 +169,6 @@ export default function Home() {
           <div className="hero-dot absolute top-[45%] left-[8%] w-2 h-2 rounded-full bg-white/10" />
           <div className="hero-dot absolute top-[50%] right-[8%] w-2 h-2 rounded-full bg-purple-400/15" />
 
-          {/* === PULSING DOT (live indicator feel) === */}
           <div className="absolute top-[18%] left-[22%]">
             <div className="hero-pulse absolute w-4 h-4 rounded-full bg-purple-400/20 -translate-x-1/2 -translate-y-1/2" />
           </div>
@@ -1001,13 +179,11 @@ export default function Home() {
             />
           </div>
 
-          {/* === DIAMOND SHAPES === */}
           <div className="hero-corner absolute top-[22%] left-[42%] w-2 h-2 bg-purple-400/30 rotate-45" />
           <div className="hero-corner absolute bottom-[22%] right-[42%] w-2 h-2 bg-white/20 rotate-45" />
           <div className="hero-corner absolute top-[50%] left-[14%] w-1.5 h-1.5 bg-blue-400/30 rotate-45" />
           <div className="hero-corner absolute top-[48%] right-[14%] w-1.5 h-1.5 bg-purple-300/30 rotate-45" />
 
-          {/* === CROSSHAIR kecil === */}
           <div className="hero-dot absolute top-[35%] left-[18%] opacity-20">
             <div className="absolute w-4 h-px bg-white top-0 left-0" />
             <div className="absolute w-px h-4 bg-white top-[-8px] left-[8px]" />
@@ -1017,7 +193,6 @@ export default function Home() {
             <div className="absolute w-px h-3 bg-purple-300 top-[-6px] left-[6px]" />
           </div>
 
-          {/* === DOT GRID pojok dalam === */}
           <div className="hero-corner absolute top-20 left-20 grid grid-cols-3 gap-[8px]">
             {Array.from({ length: 9 }).map((_, i) => (
               <div
@@ -1035,7 +210,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* === BOTTOM BAR — metadata strip === */}
           <div className="hero-bottom-bar absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-8">
             <div className="w-px h-4 bg-white/10" />
             <span className="text-[9px] tracking-[0.5em] uppercase text-white/20 font-mono">
@@ -1048,13 +222,11 @@ export default function Home() {
             <div className="w-px h-4 bg-white/10" />
           </div>
 
-          {/* === NOMOR POJOK editorial === */}
           <span className="hero-tag absolute top-8 left-1/2 -translate-x-1/2 text-[9px] text-white/15 font-mono tracking-[0.5em]">
             01 / HERO
           </span>
         </div>
 
-        {/* Teks utama */}
         <div style={{ perspective: "800px" }}>
           <h1
             ref={heroRef}
@@ -1065,7 +237,6 @@ export default function Home() {
           </h1>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 z-10">
           <span className="text-xs tracking-[0.3em] uppercase">Scroll</span>
           <div className="w-px h-12 bg-white/50 origin-top animate-[scaleY_1.5s_ease-in-out_infinite_alternate]" />
@@ -1214,20 +385,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SPLIT TEXT */}
       <section className="h-screen flex items-center justify-center px-10 relative overflow-hidden">
-        {/* ── DEKORASI SPLIT TEXT ── */}
         <div
           ref={splitDecorRef}
           className="absolute inset-0 pointer-events-none"
         >
-          {/* Teks vertikal kiri — rotated typography */}
-
-          {/* Diamond kecil tersebar */}
           <div className="split-shape absolute top-[25%] right-[18%] w-2 h-2 bg-purple-400/30 rotate-45" />
           <div className="split-shape absolute bottom-[28%] left-[18%] w-1.5 h-1.5 bg-white/20 rotate-45" />
           <div className="split-shape absolute top-[60%] right-[10%] w-1 h-1 bg-blue-400/40 rotate-45" />
 
-          {/* Nomor pojok — editorial style */}
           <span className="split-label absolute top-8 left-10 text-[10px] text-white/15 font-mono tracking-widest">
             03 /
           </span>
@@ -1235,7 +402,6 @@ export default function Home() {
             SKILLS
           </span>
 
-          {/* Plus crosshair kecil */}
           <div className="split-shape absolute top-[40%] left-[12%] opacity-20">
             <div className="absolute w-4 h-px bg-white top-1/2 left-0" />
             <div className="absolute w-px h-4 bg-white left-1/2 top-0" />
@@ -1246,7 +412,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Teks utama */}
         <h2
           ref={splitTextRef}
           className="text-5xl md:text-7xl text-center max-w-4xl tracking-tight leading-tight relative z-10"
@@ -1348,7 +513,6 @@ export default function Home() {
                 key={i}
                 className="morph-card aspect-square bg-neutral-900 rounded-3xl relative overflow-hidden group cursor-pointer"
               >
-                {/* Foto — tampil jika image diisi */}
                 {card.image && (
                   <Image
                     src={card.image}
@@ -1359,7 +523,6 @@ export default function Home() {
                   />
                 )}
 
-                {/* Placeholder jika belum ada foto */}
                 {!card.image && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-20">
                     <svg
@@ -1380,15 +543,12 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Label */}
                 <span className="absolute bottom-6 left-6 text-lg font-semibold opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                   {card.label}
                 </span>
 
-                {/* Badge kategori */}
                 <span className="absolute top-5 left-5 text-[10px] tracking-widest uppercase bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   {card.label}
                 </span>
